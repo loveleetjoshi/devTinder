@@ -2,10 +2,15 @@ const express = require('express');
 
 const app = express();
 
-app.use("/", (req, res) => {
-    res.send("Hello from server!")
+app.get("/user", (req, res) => {
+    res.send({ firstName: "Loveleet", lastName: "Joshi" })
 })
 
+app.post("/user", (req, res) => {
+    res.send("Saved data to DB!")
+})
+
+// this will match all HTTP methods
 app.use("/test", (req, res) => {
     res.send("test route served")
 })
