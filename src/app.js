@@ -2,11 +2,20 @@ const express = require('express');
 
 const app = express();
 
-app.get("/user", (req, res) => {
-    res.send({ firstName: "Loveleet", lastName: "Joshi" })
+app.get("/users", (req, res) => {
+    console.log(req.query)
+    res.send([
+        { firstName: "Loveleet", lastName: "Joshi" },
+        { firstName: "Rohit", lastName: "Chand" }
+    ])
 })
 
-app.post("/user", (req, res) => {
+app.get("/users/:userId", (req, res) => {
+    console.log(req.params)
+    res.send({ firstName: "Rohit", lastName: "Chand" })
+})
+
+app.post("/users", (req, res) => {
     res.send("Saved data to DB!")
 })
 
