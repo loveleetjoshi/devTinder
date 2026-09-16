@@ -1,6 +1,20 @@
 const express = require('express');
+const { adminAuth, userAuth } = require('./middlewares/auth')
 
 const app = express();
+
+const users = [
+    { firstName: "Loveleet", lastName: "Joshi" },
+    { firstName: "Rohit", lastName: "Chand" }
+]
+
+// Middlewares
+app.use("/admin", adminAuth)
+// app.use("/users", userAuth)
+
+app.delete("/admin/users/:userId", (req, res) => {
+    res.send("Deleted user")
+})
 
 // Multiple route handlers
 app.use("/users", (req, res, next) => {
@@ -8,18 +22,15 @@ app.use("/users", (req, res, next) => {
     next()
     // res.send("Response!!")
 },
-// (req, res) => {
-//     console.log("Handling route abc2")
-//     res.send("2nd response!!")
-// }
+    // (req, res) => {
+    //     console.log("Handling route abc2")
+    //     res.send("2nd response!!")
+    // }
 )
 
-app.get("/users", (req, res) => {
+app.get("/users", userAuth, (req, res) => {
     console.log(req.query)
-    res.send([
-        { firstName: "Loveleet", lastName: "Joshi" },
-        { firstName: "Rohit", lastName: "Chand" }
-    ])
+    res.send(users)
 })
 
 app.get("/users/:userId", (req, res) => {
