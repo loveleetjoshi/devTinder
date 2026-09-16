@@ -9,7 +9,7 @@ export const adminAuth = (req, res, next) => {
 }
 
 export const userAuth = (req, res, next) => {
-    const isAuthorized = false
+    const isAuthorized = true
 
     if (!isAuthorized) {
         res.status(401).send("Unauthorized");

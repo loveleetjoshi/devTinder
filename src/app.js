@@ -29,8 +29,22 @@ app.use("/users", (req, res, next) => {
 )
 
 app.get("/users", userAuth, (req, res) => {
-    console.log(req.query)
-    res.send(users)
+    try {
+        // Login of DB call and get user data
+        throw new Error("avds")
+        console.log(req.query)
+        res.send(users)
+    } catch (error) {
+        res.status(500).send("Some error contact support team")
+    }
+})
+
+// Error handling globally
+app.use("/", (err, req, res, next) => {
+    if (err) {
+        // Log your errors
+        res.status(500).send("Something went wrong")
+    }
 })
 
 app.get("/users/:userId", (req, res) => {
