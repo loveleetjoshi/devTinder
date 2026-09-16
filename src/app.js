@@ -2,6 +2,18 @@ const express = require('express');
 
 const app = express();
 
+// Multiple route handlers
+app.use("/users", (req, res, next) => {
+    console.log("Handling route abc")
+    next()
+    // res.send("Response!!")
+},
+// (req, res) => {
+//     console.log("Handling route abc2")
+//     res.send("2nd response!!")
+// }
+)
+
 app.get("/users", (req, res) => {
     console.log(req.query)
     res.send([
